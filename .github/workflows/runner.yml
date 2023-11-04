@@ -27,7 +27,7 @@ jobs:
 
     - name: Set cron schedule
       run: |
-        sed -i 's/^- cron: "[^"]*"/- cron: "${{ steps.script-output.outputs.script_output }}"/' .github/workflows/runner.yml
+        sed -i 's/cron: ".*"/cron: "${{ steps.script-output.outputs.script_output }}"/' .github/workflows/runner.yml
 
     - name: Commit and push changes
       run: |
