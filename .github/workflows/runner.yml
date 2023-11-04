@@ -3,7 +3,7 @@ name: running around
 on:
   workflow_dispatch:
   schedule:
-    - cron: "17 03 12 11 0"
+    - cron: "33 * * * *"
 
 jobs:
   run-script:
@@ -31,9 +31,16 @@ jobs:
       run: |
         sed -i '0,/cron: ".*"/s/cron: ".*"/cron: "${{ steps.script-output.outputs.script_output }}"/' .github/workflows/runner.yml
 
-    - name: Commit readme
+    - name: Commit inputFile
+      uses: EndBug/add-and-commit@v9
+      with:
+        add: 'inputJson.json' 
+        message: 'update Link'
+        push: true
+
+    - name: Commit workflow
       uses: EndBug/add-and-commit@v9
       with:
         add: '.github/workflows/runner.yml' 
-        message: 'update workflow'
+        message: 'set new runtime'
         push: true
