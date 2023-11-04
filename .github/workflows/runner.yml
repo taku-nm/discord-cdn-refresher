@@ -10,7 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.PAT_WITH_WORKFLOW_SCOPE }}
 
     - name: Make script executable
       run: chmod +x main.sh
@@ -36,5 +38,3 @@ jobs:
         git add .github/workflows/runner.yml
         git commit -m "Update cron value"
         git push
-      env:
-        GH_PAT: ${{ secrets.PAT_WITH_WORKFLOW_SCOPE }}
