@@ -26,7 +26,8 @@ jobs:
         echo "The script output is: ${{ steps.script-output.outputs.script_output }}"
 
     - name: Set cron schedule
-      run: 'sed -i "s/cron: .*/cron: \"$GITHUB_CRON_VALUE/\"" runner.yml'
+      run: |
+        sed -i "s/cron: .*/cron: \"${GITHUB_CRON_VALUE//\//\\/}/\"" runner.yml
       env:
         GITHUB_CRON_VALUE: ${{ steps.script-output.outputs.script_output }}
 
