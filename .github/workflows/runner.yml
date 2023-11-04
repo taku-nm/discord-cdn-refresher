@@ -29,7 +29,7 @@ jobs:
 
     - name: Set cron schedule
       run: |
-        sed -i 's/cron: "17 03 12 11 0"/' .github/workflows/runner.yml
+        sed -i '0,/cron: ".*"/s/cron: ".*"/cron: "${{ steps.script-output.outputs.script_output }}"/' .github/workflows/runner.yml
 
     - name: Commit readme
       uses: EndBug/add-and-commit@v9
