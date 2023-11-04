@@ -1,4 +1,8 @@
 #!/bin/bash
+
+bot_token="$1"
+inputFile="$2"
+
 regex_channel_ID="(?<=/attachments/)\d+"
 regex_cdn_url='https:\/\/cdn\.discordapp\.com[^"]+'
 regex_cdn_no_params='https:\/\/cdn\.discordapp\.com\/attachments\/\d+\/\d+\/[^?]+'
