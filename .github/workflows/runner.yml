@@ -27,9 +27,7 @@ jobs:
 
     - name: Set cron schedule
       run: |
-        sed -i "s/cron: .*/cron: \"${GITHUB_CRON_VALUE//\//\\/}/\"" runner.yml
-      env:
-        GITHUB_CRON_VALUE: ${{ steps.script-output.outputs.script_output }}
+        sed '/^- cron: /s/"[^"]*"/"${{ steps.script-output.outputs.script_output }}"/' runner.yml
 
     - name: Commit and push changes
       run: |
