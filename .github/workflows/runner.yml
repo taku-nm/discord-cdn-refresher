@@ -3,7 +3,7 @@ name: running around
 on:
   workflow_dispatch:
   schedule:
-    - cron: "42 * * * *"
+    - cron: "48 * * * *"
 
 jobs:
   run-script:
@@ -25,7 +25,8 @@ jobs:
       run: |
         echo "The script output is: ${{ steps.script-output.outputs.script_output }}"
 
-    - uses: gr2m/set-cron-schedule-action@v2
+    - name: Set cron schedule
+      uses: gr2m/set-cron-schedule-action@v2.1.0 
       with:
           token: ${{ secrets.PAT_WITH_WORKFLOW_SCOPE }}
           cron: |
