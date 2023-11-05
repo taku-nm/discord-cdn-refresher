@@ -68,17 +68,15 @@ function findOldestURL () {
     #function output
     oldest_url=$target_url
     oldestTimestamp=${sorted_values[0]}
-    echo findOldest oldest_url: $oldest_url
-    echo findOldest oldestTimestamp: $oldestTimestamp
 }
 
 function updateURL () {
     # clean inputLink (grep regex_cdn_no_params)
     clean_input_URL=($(echo "$oldest_url" | grep -o -P "$regex_cdn_no_params"))
-    echo clean input url $clean_input_URL
+    
     # get channel id
     channel_ID=($(echo "$oldest_url" | grep -o -P "$regex_channel_ID"))
-    echo channel ID $channel_ID
+
     # get messagesJson
     getMessages "$channel_ID"
 
@@ -88,6 +86,7 @@ function updateURL () {
     # find corresponding messageLink in array by comparing with substring match
     for messagesURL in "${messagesURLs[@]}"; do
         if [[ "${messagesURL,,}" == *"${clean_input_URL,,}"* ]]; then
+            echo
             echo if condition met at message url: $messagesURL
             echo comparing to clean input: $clean_input_URL
             new_url="$messagesURL"
