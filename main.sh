@@ -105,7 +105,7 @@ function updateURL () {
 
     if [ "$found" = false ]; then
         echo "FATAL: Condition not met in the loop. No link found?"
-        exit 1
+        echo
     fi
 }
 
