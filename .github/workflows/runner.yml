@@ -3,7 +3,7 @@ name: running around
 on:
   workflow_dispatch:
   schedule:
-    - cron: ""
+    - cron: "30 12 * * *"
 
 jobs:
   run-script:
@@ -21,7 +21,7 @@ jobs:
       id: script-output
       run: |
         output=$(./main.sh "${{ secrets.BOT_TOKEN }}" "inputJson.json")
-        echo "{CRON}={$output}" >> $GITHUB_OUTPUT
+        echo "CRON=$output" >> $GITHUB_OUTPUT
 
     - name: Set cron schedule
       run: |
