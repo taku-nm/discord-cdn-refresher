@@ -74,11 +74,19 @@ function updateURL () {
     # clean inputLink (grep regex_cdn_no_params)
     clean_input_URL=($(echo "$oldest_url" | grep -o -P "$regex_cdn_no_params"))
     
+    old_channel_ID=$channel_ID
+
     # get channel id
     channel_ID=($(echo "$oldest_url" | grep -o -P "$regex_channel_ID"))
 
-    # get messagesJson
-    getMessages "$channel_ID"
+    if [[ "$channel_ID" = "$old_channel_ID" ]]; then
+        echo The channelID appears to be the same. Lets not bother discord for a new message json.
+    else
+        # get messagesJson
+        echo new channelID. Fetching in 5 seconds.
+        sleep 5
+        getMessages "$channel_ID"
+    fi
 
     # create messagesURL array
     messagesURLs=($(echo "$messagesJsonContent" | grep -o -P "$regex_cdn_url"))
@@ -104,7 +112,9 @@ function updateURL () {
     done
 
     if [ "$found" = false ]; then
+        echo
         echo "FATAL: Condition not met in the loop. No link found?"
+        echo Input URL: $clean_input_URL
         echo
     fi
 }
