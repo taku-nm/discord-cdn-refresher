@@ -3,7 +3,7 @@ name: running around
 on:
   workflow_dispatch:
   schedule:
-    - cron: "50 13 * * *"
+    - cron: "new channelID. Fetching in 5 seconds."
 
 jobs:
   run-script:
