@@ -88,6 +88,8 @@ function updateURL () {
     # find corresponding messageLink in array by comparing with substring match
     for messagesURL in "${messagesURLs[@]}"; do
         if [[ "${messagesURL,,}" == *"${clean_input_URL,,}"* ]]; then
+            echo if condition met at message url: $messagesURL
+            echo comparing to clean input: $clean_input_URL
             new_url="$messagesURL"
             break
         fi
