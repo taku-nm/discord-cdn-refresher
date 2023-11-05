@@ -31,7 +31,7 @@ function main () {
 
 function getMessages () {
     messagesJson=$(mktemp)
-    curl -H "Authorization: Bot $bot_token" https://discord.com/api/v9/channels/$1/messages > "$messagesJson"
+    curl -H "Authorization: Bot $bot_token" https://discord.com/api/v9/channels/$1/messages?limit=100 > "$messagesJson"
     messagesJsonContent=$(cat "$messagesJson")
 }
 
@@ -79,14 +79,12 @@ function updateURL () {
     # get channel id
     channel_ID=($(echo "$oldest_url" | grep -o -P "$regex_channel_ID"))
 
-    if [[ "$channel_ID" = "$old_channel_ID" ]]; then
-        echo The channelID appears to be the same. Lets not bother discord for a new message json.
-    else
+    if [[ "$channel_ID" != "$old_channel_ID" ]]; then
         # get messagesJson
-        echo new channelID. Fetching in 5 seconds.
         sleep 5
         getMessages "$channel_ID"
     fi
+
 
     # create messagesURL array
     messagesURLs=($(echo "$messagesJsonContent" | grep -o -P "$regex_cdn_url"))
@@ -96,13 +94,7 @@ function updateURL () {
 
     # find corresponding messageLink in array by comparing with substring match
     for messagesURL in "${messagesURLs[@]}"; do
-        echo loop at message url: $messagesURL
         if [[ "${messagesURL,,}" == *"${clean_input_URL,,}"* ]]; then
-            echo
-            echo
-            echo
-            echo if CONDITION MET at message url: $messagesURL
-            echo comparing to clean input: $clean_input_URL
             new_url="$messagesURL"
             found=true
             # sed replace full inputLink with full messageLink
@@ -116,6 +108,7 @@ function updateURL () {
         echo "FATAL: Condition not met in the loop. No link found?"
         echo Input URL: $clean_input_URL
         echo
+        exit 404
     fi
 }
 
