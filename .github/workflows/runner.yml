@@ -24,10 +24,8 @@ jobs:
         echo "{CRON}={$output}" >> $GITHUB_OUTPUT
 
     - name: Set cron schedule
-      env:
-        CRON_VALUE: ${{ steps.script-output.outputs.CRON }}
       run: |
-        sed -i '0,/cron: ".*"/s/cron: ".*"/cron: "$CRON_VALUE"/' .github/workflows/runner.yml
+        sed -i '0,/cron: ".*"/s/cron: ".*"/cron: "${{ steps.script-output.outputs.CRON }}"/' .github/workflows/runner.yml
 
     - name: Commit inputFile
       uses: EndBug/add-and-commit@v9
