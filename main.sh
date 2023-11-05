@@ -83,6 +83,9 @@ function updateURL () {
     # create messagesURL array
     messagesURLs=($(echo "$messagesJsonContent" | grep -o -P "$regex_cdn_url"))
 
+    # clear found state
+    found=false
+
     # find corresponding messageLink in array by comparing with substring match
     for messagesURL in "${messagesURLs[@]}"; do
         echo loop at message url: $messagesURL
@@ -93,13 +96,17 @@ function updateURL () {
             echo if CONDITION MET at message url: $messagesURL
             echo comparing to clean input: $clean_input_URL
             new_url="$messagesURL"
-            
+            found=true
             # sed replace full inputLink with full messageLink
             sed -i "s|$(echo "$oldest_url" | sed 's/[\&/]/\\&/g')|$(echo "$new_url" | sed 's/[\&/]/\\&/g')|g" "$inputFile"
             break
         fi
     done
-    
+
+    if [ "$found" = false ]; then
+        echo "FATAL: Condition not met in the loop. No link found?"
+        exit 1
+    fi
 }
 
 # getInputFile
