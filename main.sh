@@ -85,19 +85,21 @@ function updateURL () {
 
     # find corresponding messageLink in array by comparing with substring match
     for messagesURL in "${messagesURLs[@]}"; do
+        echo loop at message url: $messagesURL
         if [[ "${messagesURL,,}" == *"${clean_input_URL,,}"* ]]; then
             echo
-            echo if condition met at message url: $messagesURL
+            echo
+            echo
+            echo if CONDITION MET at message url: $messagesURL
             echo comparing to clean input: $clean_input_URL
             new_url="$messagesURL"
+            
+            # sed replace full inputLink with full messageLink
+            sed -i "s|$(echo "$oldest_url" | sed 's/[\&/]/\\&/g')|$(echo "$new_url" | sed 's/[\&/]/\\&/g')|g" "$inputFile"
             break
         fi
     done
-    echo replacer:
-    echo oldest url: $oldest_url
-    echo new url: $new_url
-    # sed replace full inputLink with full messageLink
-    sed -i "s|$(echo "$oldest_url" | sed 's/[\&/]/\\&/g')|$(echo "$new_url" | sed 's/[\&/]/\\&/g')|g" "$inputFile"
+    
 }
 
 # getInputFile
