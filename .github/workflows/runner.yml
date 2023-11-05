@@ -21,15 +21,13 @@ jobs:
       id: script-output
       run: |
         output=$(./main.sh "${{ secrets.BOT_TOKEN }}" "inputJson.json")
-        echo "::set-output name=script_output::$output"
-
-    - name: Use the output
-      run: |
-        echo "The script output is: ${{ steps.script-output.outputs.script_output }}"
+        echo "{CRON}={$output}" >> $GITHUB_OUTPUT
 
     - name: Set cron schedule
+      env:
+        CRON_VALUE: ${{ steps.script-output.outputs.CRON }}
       run: |
-        sed -i '0,/cron: ".*"/s/cron: ".*"/cron: "${{ steps.script-output.outputs.script_output }}"/' .github/workflows/runner.yml
+        sed -i '0,/cron: ".*"/s/cron: ".*"/cron: "$CRON_VALUE"/' .github/workflows/runner.yml
 
     - name: Commit inputFile
       uses: EndBug/add-and-commit@v9
