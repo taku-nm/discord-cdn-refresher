@@ -15,7 +15,7 @@ function main () {
     findOldestURL "$inputFileContent"
 
     current_timestamp=$(date +%s)
-    echo current $current_timestamp
+
     if [ "$oldestTimestamp" -lt "$current_timestamp" ]; then
         updateURL
         main
@@ -124,4 +124,4 @@ function updateURL () {
 
 # getInputFile
 main
-echo $cron_date
+echo current $current_timestamp
