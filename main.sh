@@ -31,7 +31,8 @@ function main () {
     fi
 
     if [ "$timeDifference" -gt "500" ]; then
-        cron_date=$(date -d "@$oldestTimestamp" "+%M %H %d %m %w")
+        targetTimestamp=$(($oldestTimestamp - 120))
+        cron_date=$(date -d "@$targetTimestamp" "+%M %H %d %m *")
     fi
 }
 
