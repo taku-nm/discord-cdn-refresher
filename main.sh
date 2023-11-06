@@ -124,4 +124,4 @@ function updateURL () {
 
 # getInputFile
 main
-echo current $current_timestamp
+echo $cron_date
