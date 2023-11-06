@@ -19,7 +19,19 @@ function main () {
         updateURL
         main
     fi
-    if [ "$oldestTimestamp" -gt "$current_timestamp" ]; then
+
+    timeDifference=$(($oldestTimestamp - $current_timestamp))
+
+    if [ "$timeDifference" -le "500" ]; then
+        echo Time difference is $timeDifference
+        echo I will sleep until then
+        sleep $timeDifference
+        updateURL
+        main
+    fi
+
+    if [ "$timeDifference" -gt "500" ]; then
+        echo difference greater than 500
         cron_date=$(date -d "@$oldestTimestamp" "+%M %H %d %m %w")
     fi
 }
