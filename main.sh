@@ -15,6 +15,7 @@ function main () {
     findOldestURL "$inputFileContent"
 
     current_timestamp=$(date +%s)
+    echo current $current_timestamp
     if [ "$oldestTimestamp" -lt "$current_timestamp" ]; then
         updateURL
         main
