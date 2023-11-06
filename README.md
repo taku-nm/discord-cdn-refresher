@@ -17,8 +17,8 @@ Dispatch the workflow at least once manually to get the cycle running.
 --- 
 This probably has some limitations. The script does replace every URL it can find and determine as expired.
 
-Maybe it could cause issues if an URL is about to expire within 2 minutes, therefore trying to call the workflow again within 2 minutes.
+It now also sleeps for whatever time is needed if it finds that the next schedule would be within 500 seconds.
 
-GitHub warns that workflows only run every 5 minutes, so maybe this just causes a delay or maybe this causes it to skip?
+This avoids schedules that are too tight for github.
 
-I have no idea. This is pre-alpha. This is just another silly little script, supporting auto-cli
+This is pre-alpha. This is just another silly little script, supporting auto-cli
