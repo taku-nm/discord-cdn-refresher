@@ -32,7 +32,7 @@ function main () {
 
     if [ "$timeDifference" -gt "500" ]; then
         targetTimestamp=$(($oldestTimestamp - 120))
-        cron_date=$(date -d "@$targetTimestamp" "+%M %H %d %m *")
+        cron_date=$(date -d "@$targetTimestamp" "+%M %H %d %m")
     fi
 }
 
@@ -123,4 +123,4 @@ function updateURL () {
 }
 
 main
-echo $cron_date
+echo "$cron_date *"

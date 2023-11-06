@@ -3,7 +3,7 @@ name: running around
 on:
   workflow_dispatch:
   schedule:
-    - cron: "47 12 14 11 README.md inputJson.json main.sh"
+    - cron: "40 * * * *"
 
 jobs:
   run-script:
