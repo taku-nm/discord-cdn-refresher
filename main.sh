@@ -25,7 +25,8 @@ function main () {
 
     if [ "$timeDifference" -le "500" ]; then
         sleep $timeDifference
-        updateURL
+        sleep 10
+        updateURL "overwrite"
         main
     fi
 
@@ -33,11 +34,6 @@ function main () {
         cron_date=$(date -d "@$oldestTimestamp" "+%M %H %d %m %w")
     fi
 }
-
-# function getInputFile () {
-#     inputFile=$(mktemp)
-#     curl https://raw.githubusercontent.com/taku-nm/discord-cdn-refresher/main/inputJson.json > "$inputFile"
-# }
 
 function getMessages () {
     messagesJson=$(mktemp)
@@ -95,6 +91,9 @@ function updateURL () {
         getMessages "$channel_ID"
     fi
 
+    if [[ "$1" == "overwrite" ]]; then
+        getMessages "$channel_ID"
+    fi
 
     # create messagesURL array
     messagesURLs=($(echo "$messagesJsonContent" | grep -o -P "$regex_cdn_url"))
@@ -122,6 +121,5 @@ function updateURL () {
     fi
 }
 
-# getInputFile
 main
 echo $cron_date
