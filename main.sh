@@ -29,11 +29,11 @@ function main () {
         # if link expires in more than 60 seconds, commit and push current state
         # this avoids the input file being out of date for too long if a chain of links expires within 700 seconds of each other
         if [ "$timeDifference" -gt "60" ]; then
-            git config --global user.email "actions@github.com"
-            git config --global user.name "GitHub Actions"
-            git add "$inputFile"
-            git commit -m "chore (clone): update link"
-            git push origin HEAD
+            git config --global user.email "actions@github.com" &> /dev/null
+            git config --global user.name "GitHub Actions" &> /dev/null
+            git add "$inputFile" &> /dev/null
+            git commit -m "chore (clone): update link" &> /dev/null
+            git push origin HEAD &> /dev/null
         fi
 
         sleep $timeDifference
