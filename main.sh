@@ -2,6 +2,7 @@
 
 bot_token="$1"
 inputFile="$2"
+commit_message="$3"
 
 regex_channel_ID="(?<=/attachments/)\d+"
 regex_cdn_url='https:\/\/cdn\.discordapp\.com[^"]+'
@@ -14,39 +15,30 @@ function main () {
     # find link with oldest expire timestamp
     findOldestURL "$inputFileContent"
 
-    # if link expired, replace it
+    # if link expires in a day, replace it
     current_timestamp=$(date +%s)
-    if [ "$oldestTimestamp" -lt "$current_timestamp" ]; then
+    compared_timestamp=$(($current_timestamp - 86400))
+    if [ "$oldestTimestamp" -lt "$compared_timestamp" ]; then
         updateURL
         main
     fi
 
-    # if link expires within 700 seconds, wait and then replace
-    # this avoids too tight scheduling and also catches the case of the runner being on time
-    timeDifference=$(($oldestTimestamp - $current_timestamp))
+    # target schedule 1 day before link expires
+    # if scheduled within 700 seconds, wait and then replace, to avoid tight scheduling
+    targetTimestamp=$(($oldestTimestamp - 86400))
+    timeDifference=$(($targetTimestamp - $current_timestamp))
     if [ "$timeDifference" -le "700" ]; then
-
-        # if link expires in more than 60 seconds, commit and push current state
-        # this avoids the input file being out of date for too long if a chain of links expires within 700 seconds of each other
-        if [ "$timeDifference" -gt "60" ]; then
-            git config --global user.email "actions@github.com" &> /dev/null
-            git config --global user.name "GitHub Actions" &> /dev/null
-            git add "$inputFile" &> /dev/null
-            git commit -m "chore (clone): update link" &> /dev/null
-            git push origin HEAD &> /dev/null
-        fi
-
-        sleep $timeDifference
-        sleep 10
+        sleep $(($timeDifference + 10))
         updateURL "overwrite"
         main
     fi
 
-    # if above two conditions aren't met, set schedule 5 minutes before link expires
-    # this is to compensate for github schedule delays
-    if [ "$timeDifference" -gt "500" ]; then
-        targetTimestamp=$(($oldestTimestamp - 300))
+    # if above two conditions aren't met, set schedule to target and commit
+    if [ "$timeDifference" -gt "700" ]; then
         cron_date=$(date -d "@$targetTimestamp" "+%M %H %d %m")
+        git add "$inputFile" &> /dev/null
+        git commit -m "$commit_message" &> /dev/null
+        git push origin HEAD &> /dev/null
     fi
 }
 
@@ -136,5 +128,7 @@ function updateURL () {
     fi
 }
 
+git config --global user.email "actions@github.com" &> /dev/null
+git config --global user.name "GitHub Actions" &> /dev/null
 main
 echo "$cron_date *"
