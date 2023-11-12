@@ -13,7 +13,7 @@ jobs:
       - name: Checkout branch
         uses: actions/checkout@v4
       - name: Update le version
-        run: jq --arg newVersion "$new_bat_version" '.batVersion = $newVersion' "inputJson.json" > inputJson.json
+        run: jq --arg newVersion "${{ github.event.inputs.version }}" '.batVersion = $newVersion' "inputJson.json" > inputJson.json
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
