@@ -10,6 +10,7 @@ regex_cdn_no_params='https:\/\/cdn\.discordapp\.com\/attachments\/\d+\/\d+\/[^?]
 regex_ex_value="(?<=\?ex=)[^&]+"
 
 function main () {
+
     inputFileContent=$(cat "$inputFile")
     
     # find link with oldest expire timestamp
@@ -17,8 +18,12 @@ function main () {
 
     # if link expires in a day, replace it
     current_timestamp=$(date +%s)
-    compared_timestamp=$(($current_timestamp - 86400))
-    if [ "$oldestTimestamp" -lt "$compared_timestamp" ]; then
+    compared_timestamp=$(($current_timestamp + 86400))
+    echo "Current Timestamp: $current_timestamp" 1>&2
+    echo "Compared Timestamp: $compared_timestamp" 1>&2
+    echo "Oldest Timestamp: $oldestTimestamp" 1>&2
+    if [ "$oldestTimestamp" -le "$compared_timestamp" ]; then
+        echo "detected expired timestamp" 1>&2
         updateURL
         main
     fi
@@ -27,18 +32,24 @@ function main () {
     # if scheduled within 700 seconds, wait and then replace, to avoid tight scheduling
     targetTimestamp=$(($oldestTimestamp - 86400))
     timeDifference=$(($targetTimestamp - $current_timestamp))
+    echo "Time difference: $timeDifference" 1>&2
     if [ "$timeDifference" -le "700" ]; then
+        echo "Timestamp within range" 1>&2
+        echo "Sleeping..." 1>&2
         sleep $(($timeDifference + 10))
         updateURL "overwrite"
         main
     fi
 
-    # if above two conditions aren't met, set schedule to target and commit
+    # if above two conditions aren't met, set schedule to target, commit and exit
     if [ "$timeDifference" -gt "700" ]; then
+        echo "Scheduling..." 1>&2
         cron_date=$(date -d "@$targetTimestamp" "+%M %H %d %m")
+        echo "$cron_date *"
         git add "$inputFile" &> /dev/null
         git commit -m "$commit_message" &> /dev/null
         git push origin HEAD &> /dev/null
+        exit 0
     fi
 }
 
@@ -120,10 +131,10 @@ function updateURL () {
     done
 
     if [ "$found" = false ]; then
-        echo
-        echo "FATAL: Condition not met in the loop. No link found?"
-        echo Input URL: $clean_input_URL
-        echo
+        echo 1>&2
+        echo "FATAL: Condition not met in the loop. No link found?" 1>&2
+        echo Input URL: $clean_input_URL 1>&2
+        echo 1>&2
         exit 404
     fi
 }
@@ -131,4 +142,3 @@ function updateURL () {
 git config --global user.email "actions@github.com" &> /dev/null
 git config --global user.name "GitHub Actions" &> /dev/null
 main
-echo "$cron_date *"
