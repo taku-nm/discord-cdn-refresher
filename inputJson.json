@@ -116,7 +116,7 @@
       {
         "fname": "TikTok.apk",
         "dname": "TikTok (30.8.4)",
-        "link": "https://cdn.discordapp.com/attachments/1149345921516187789/1149348108535353484/com.zhiliaoapp.musically_30.8.4-2023008040.apk?ex=656899d6&is=655624d6&hm=b52fa6d4d1a37408a9ea40a03bdcbc9db28b5fe8ee0991aeb3d98bbae28b0dbe&",
+        "link": "https://cdn.discordapp.com/attachments/1149345921516187789/1149348108535353484/com.zhiliaoapp.musically_30.8.4-2023008040.apk?ex=6571d456&is=655f5f56&hm=304f97b304296d39a09a981211e378503d5b02378d65f0afdc2bec256a63b419&",
         "hash": "f0b5834a56d3e8a3f2fd005f9a2d7d6da4cd8b8ff558258467296a8666c83144",
         "patches": "-i \"SIM spoof\"",
         "uri": " ",
@@ -176,7 +176,7 @@
       {
         "fname": "Relay.apk",
         "dname": "Relay for Reddit (10.2.40)",
-        "link": "https://cdn.discordapp.com/attachments/1149345921516187789/1159570057324671026/free.reddit.news_10.2.40-641.apk?ex=6568dfc5&is=65566ac5&hm=3d6a4c29211e7174289270effd2e9912c443b16305d3a02baf8e08e4883d56b0&",
+        "link": "https://cdn.discordapp.com/attachments/1149345921516187789/1159570057324671026/free.reddit.news_10.2.40-641.apk?ex=65721a45&is=655fa545&hm=cb5ee0878da49f89b701aecbc40deb45feba9247e5e20e5fb027be78f2cbf180&",
         "hash": "bab6f726d1932ef8ffccf43ff741a5b34dff505ea16d15d5474bd9855f588df1",
         "patches": " ",
         "uri": "dbrady://relay",
@@ -186,7 +186,7 @@
       {
         "fname": "RiF.apk",
         "dname": "Rif for Reddit (5.6.22)",
-        "link": "https://cdn.discordapp.com/attachments/1149345921516187789/1156940114342195242/com.andrewshu.android.reddit_5.6.22-4622.apk?ex=656888f2&is=655613f2&hm=2f26101f747b3c1bd808526e33184013b49dd982594506cbbd66927be0302022&",
+        "link": "https://cdn.discordapp.com/attachments/1149345921516187789/1156940114342195242/com.andrewshu.android.reddit_5.6.22-4622.apk?ex=6571c372&is=655f4e72&hm=d92cd6d8a68316da98b1ab310ad018f0891ce8428f859bc61647633052e3cec5&",
         "hash": "88d39f859c850f51542c6a12d8bd3c79706debe0f1dff061ed0fe32b3dc688e1",
         "patches": " ",
         "uri": "redditisfun://auth",
