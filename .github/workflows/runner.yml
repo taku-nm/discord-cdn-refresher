@@ -3,7 +3,7 @@ name: running around
 on:
   workflow_dispatch:
   schedule:
-    - cron: "34 23 08 12 *"
+    - cron: "17 03 09 12 *"
 
 jobs:
   run-script:
