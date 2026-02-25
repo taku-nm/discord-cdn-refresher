@@ -216,7 +216,7 @@
       {
         "fname": "YouTube.apk",
         "dname": "YouTube Android 5 (16.40.36)",
-        "link": "https://cdn.discordapp.com/attachments/1159971981869977632/1167877731510407238/com.google.android.youtube_16.40.36-1523705280.apk?ex=699e88a5&is=699d3725&hm=a2d008e5ced5e022ef2be116ec40f5e4ff21bfd22c32bbf7dd2420893fc389de&",
+        "link": "https://cdn.discordapp.com/attachments/1159971981869977632/1167877731510407238/com.google.android.youtube_16.40.36-1523705280.apk?ex=699f3165&is=699ddfe5&hm=5710f47b32f4f00d122c736a2d0dfe06ac20cc80dff05d2cd51ba1ade7c7cd7f&",
         "hash": "a56252e640d3528536b2fcd243d7d30e5c0ebdb4c81fa017a9a45da9aaafcfb6",
         "patches": "-i microg-support -i spoof-player-parameters -i client-spoof -i hide-video-ads -i enable-minimized-playback -i disable-update-screen --exclusive",
         "uri": " ",
