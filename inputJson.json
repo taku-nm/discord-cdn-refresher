@@ -76,7 +76,7 @@
       {
         "fname": "YouTube.apk",
         "dname": "YouTube (Stock logo) (18.38.44)",
-        "link": "https://cdn.discordapp.com/attachments/1159971981869977632/1160415681360167023/com.google.android.youtube_18.38.44-1540236736.apk?ex=69a1b591&is=69a06411&hm=7817520f16bf0b0896fa7b95ac53dbf46061e276470ece016427ab2f848361e9&",
+        "link": "https://cdn.discordapp.com/attachments/1159971981869977632/1160415681360167023/com.google.android.youtube_18.38.44-1540236736.apk?ex=69a25e51&is=69a10cd1&hm=8c35071befe8d3184dece4579d85b8ca3ec768a8c81db6c951b6a74abc0f9ac6&",
         "hash": "87b552a02da71b96421df31277e16c07718d14d158104763fabfcf08b04e72e2",
         "patches": " ",
         "uri": " ",
@@ -86,7 +86,7 @@
       {
         "fname": "YouTube.apk",
         "dname": "YouTube (ReVanced logo) (18.38.44)",
-        "link": "https://cdn.discordapp.com/attachments/1159971981869977632/1160415681360167023/com.google.android.youtube_18.38.44-1540236736.apk?ex=69a1b591&is=69a06411&hm=7817520f16bf0b0896fa7b95ac53dbf46061e276470ece016427ab2f848361e9&",
+        "link": "https://cdn.discordapp.com/attachments/1159971981869977632/1160415681360167023/com.google.android.youtube_18.38.44-1540236736.apk?ex=69a25e51&is=69a10cd1&hm=8c35071befe8d3184dece4579d85b8ca3ec768a8c81db6c951b6a74abc0f9ac6&",
         "hash": "87b552a02da71b96421df31277e16c07718d14d158104763fabfcf08b04e72e2",
         "patches": "-i \"Custom branding\"",
         "uri": " ",
@@ -156,7 +156,7 @@
       {
         "fname": "Sync.apk",
         "dname": "Sync for Reddit (23.06.30-13:39)",
-        "link": "https://cdn.discordapp.com/attachments/1149345921516187789/1155165102341898292/com.laurencedawson.reddit_sync_v23.06.30-13_39-23033.apk?ex=69a1b956&is=69a067d6&hm=d249cd8f2a7a7074c4c4d0f86904dbda9b2e3daa6aec084e3634f7797fe5e44b&",
+        "link": "https://cdn.discordapp.com/attachments/1149345921516187789/1155165102341898292/com.laurencedawson.reddit_sync_v23.06.30-13_39-23033.apk?ex=69a26216&is=69a11096&hm=c89e6e507219f72c4980a076468dba9b9bbf1c09bf346305c5543817314be813&",
         "hash": "6469a8dcc8e2a097892f84e8962e94965713be327b18db6a3110ed96f7fa4190",
         "patches": " ",
         "uri": "http://redditsync/auth",
